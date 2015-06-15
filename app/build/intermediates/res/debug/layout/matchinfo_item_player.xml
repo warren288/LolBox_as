@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="60dp"
+    android:padding="5dp"
+    android:background="@drawable/bg_tool_griditem">
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dl_loading_img"/>
+    <TextView
+        android:id="@+id/tv_name"
+        android:textSize="15sp"
+        android:paddingLeft="5dp"
+        android:textColor="@android:color/black"
+        android:layout_width="wrap_content"
+        android:text="还在A等待"
+        android:layout_toRightOf="@id/img"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_total"
+        android:textSize="14sp"
+        android:paddingLeft="5dp"
+        android:textColor="@android:color/darker_gray"
+        android:layout_width="wrap_content"
+        android:text="总场次 1666"
+        android:layout_toRightOf="@id/img"
+        android:layout_below="@id/tv_name"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv_winrate"
+        android:textSize="14sp"
+        android:textColor="@android:color/darker_gray"
+        android:layout_width="wrap_content"
+        android:text="胜率 51%"
+        android:paddingLeft="10dp"
+        android:layout_below="@id/tv_name"
+        android:layout_toRightOf="@id/tv_total"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_zdl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:textSize="16sp"
+        android:layout_centerVertical="true"
+        android:text="6231"/>
+
+</RelativeLayout><!-- From: file:/E:/Personal/app/src/main/res/layout/matchinfo_item_player.xml -->

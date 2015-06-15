@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.warren.lolbox.widget.ImageViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="180dp" />
+<!-- From: file:/E:/Personal/app/src/main/res/layout/frags_news_info_head.xml -->

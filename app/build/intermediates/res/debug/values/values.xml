@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/E:/Personal/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="bluegreen">#4980CB</color>
+    <color name="darkblue">#021E36</color>
+    <color name="darkdarkblue">#11151E</color>
+    <color name="dlg_background">#3F4653</color>
+    <color name="greenblue">#66D2FF</color>
+    <color name="halftransparent_black">#0FFFFFFF</color>
+    <color name="halftransparent_white">#6F000000</color>
+    <color name="halftransparent_white_darker">#8F000000</color>
+    <color name="lightgrey">#F0F0F0</color>
+    <color name="main_blue">#3762A1</color>
+    <color name="transparent">#00000000</color>
+    <declare-styleable name="FlexableLayout"><attr format="dimension" name="contract_height"/></declare-styleable>
+    <declare-styleable name="ImageChooser"><attr format="integer" name="count"/><attr format="reference|color" name="foreground_choosed"/><attr format="reference|color" name="foreground_unchoosed"/><attr format="dimension" name="img_width"/></declare-styleable>
+    <declare-styleable name="ImageGroup"><attr format="integer" name="img_count"/><attr format="dimension" name="img_height"/><attr format="boolean" name="img_state_enable"/><attr format="color|reference" name="img_state_foreground"/></declare-styleable>
+    <declare-styleable name="PullToRefresh"><attr format="reference|color" name="ptrRefreshableViewBackground"/><attr format="reference|color" name="ptrHeaderBackground"/><attr format="reference|color" name="ptrHeaderTextColor"/><attr format="reference|color" name="ptrHeaderSubTextColor"/><attr name="ptrMode"><flag name="disabled" value="0x0"/><flag name="pullFromStart" value="0x1"/><flag name="pullFromEnd" value="0x2"/><flag name="both" value="0x3"/><flag name="manualOnly" value="0x4"/><flag name="pullDownFromTop" value="0x1"/><flag name="pullUpFromBottom" value="0x2"/></attr><attr format="reference|boolean" name="ptrShowIndicator"/><attr format="reference" name="ptrDrawable"/><attr format="reference" name="ptrDrawableStart"/><attr format="reference" name="ptrDrawableEnd"/><attr format="reference|boolean" name="ptrOverScroll"/><attr format="reference" name="ptrHeaderTextAppearance"/><attr format="reference" name="ptrSubHeaderTextAppearance"/><attr name="ptrAnimationStyle"><flag name="rotate" value="0x0"/><flag name="flip" value="0x1"/></attr><attr format="reference|boolean" name="ptrScrollingWhileRefreshingEnabled"/><attr format="reference|boolean" name="ptrListViewExtrasEnabled"/><attr format="reference|boolean" name="ptrRotateDrawableWhilePulling"/><attr format="reference|color" name="ptrAdapterViewBackground"/><attr format="reference" name="ptrDrawableTop"/><attr format="reference" name="ptrDrawableBottom"/></declare-styleable>
+    <declare-styleable name="StatefulImageView"><attr format="boolean|reference" name="state_enable"/><attr format="color|reference" name="state_foreground"/></declare-styleable>
+    <declare-styleable name="TitleBar"><attr format="reference" name="left_img"/><attr format="reference" name="right_img"/><attr format="reference|reference" name="left_imgbackground"/><attr format="reference|reference" name="right_imgbackground"/><attr format="string|reference" name="title"/><attr format="color|reference" name="titleColor"/><attr format="dimension" name="titleSize"/><attr format="string|reference" name="rightopers"/></declare-styleable>
+    <declare-styleable name="ViewPagerIndicator"><attr format="integer" name="item_count"/><attr format="color|reference" name="item_color"/><attr format="color|reference" name="item_color_select"/></declare-styleable>
+    <!-- From: file:/E:/Personal/app/src/main/res/values/dimens.xml -->
+    <eat-comment/>
+    <dimen name="header_footer_left_right_padding">24dp</dimen>
+    <dimen name="header_footer_top_bottom_padding">12dp</dimen>
+    <dimen name="indicator_corner_radius">12dp</dimen>
+    <dimen name="indicator_internal_padding">4dp</dimen>
+    <dimen name="indicator_right_padding">10dp</dimen>
+    <!-- From: file:/E:/Personal/app/src/main/res/values/ids.xml -->
+    <eat-comment/>
+    <item name="flexablelayout_content" type="id"/>
+    <item name="flexablelayout_panel" type="id"/>
+    <!-- From: file:/E:/Personal/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="app_name">罡斩LOL盒子</string>
+    <string name="author_info">昇哥\nCSDN博客:blog.csdn.net/warren288\nQQ:1127299450\n项目主页:https://github.com/warren288/lolbox</string>
+    <string name="author_reference">本软件是出于学习交流目的，模仿多玩官方LOL盒子，使用多玩官方服务制作而成。如有侵权，请及时告知。\n官方应用正在持续更新，时间原因，本软件的功能无法做到与官方应用同步。部分功能也可能因为官方服务接口的变化而失效，如您发现此类问题，请联系本人。如有其他问题，也请联系本人。使用QQ加好友时请说明来意。
+    </string>
+    <string name="help_feedback">昇哥\nCSDN博客:blog.csdn.net/warren288\nQQ:1127299450\n项目主页:https://github.com/warren288/lolbox</string>
+    <string name="pull_to_refresh_from_bottom_pull_label">@string/pull_to_refresh_pull_label</string>
+    <string name="pull_to_refresh_from_bottom_refreshing_label">@string/pull_to_refresh_refreshing_label</string>
+    <string name="pull_to_refresh_from_bottom_release_label">@string/pull_to_refresh_release_label</string>
+    <string name="pull_to_refresh_pull_label">刷新……</string>
+    <string name="pull_to_refresh_refreshing_label">正在刷新……</string>
+    <string name="pull_to_refresh_release_label">放开刷新……</string>
+    <string name="shake_hint">读条时摇一摇！\n查看对阵信息、英雄出装。\n长按也是可以的。</string>
+    <string name="toolmenu_baike">游戏百科</string>
+    <string name="toolmenu_bmyxtest">本名英雄测试</string>
+    <string name="toolmenu_boxnews">盒子新闻</string>
+    <string name="toolmenu_liveshow">直播</string>
+    <string name="toolmenu_lottery">每日抽奖</string>
+    <string name="toolmenu_reflecttest">LOL反应测试</string>
+    <string name="toolmenu_shrink">摇一摇</string>
+    <string name="toolmenu_video">视频</string>
+    <string name="toolmenu_weather">天气</string>
+    <string name="toolmenu_yx">英雄</string>
+    <!-- From: file:/E:/Personal/app/src/main/res/values/themes.xml -->
+    <eat-comment/>
+    <style name="CustomAppTheme" parent="@android:style/Theme.DeviceDefault.Light.NoActionBar">
+        
+        <item name="android:alertDialogStyle">@style/Dialog.Alert</item>
+        
+        <item name="android:alertDialogTheme">@style/Dialog.Alert</item>
+        
+    </style>
+    <style name="Dialog" parent="@android:style/Theme.Holo.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowTitleBackgroundStyle">@style/DialogTitleBackground</item>
+        <item name="android:windowTitleSize">16dip</item>
+        <item name="android:windowTitleStyle">@style/DialogTitleLight</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:height">50dp</item>
+        <item name="android:layout">@layout/alertdialog_message</item>
+        <item name="android:buttonBarStyle">@android:style/Holo.ButtonBar.AlertDialog</item>
+        <item name="android:borderlessButtonStyle">@android:style/Widget.Holo.Button.Borderless.Small</item>
+        <item name="android:textAppearance">@style/DialogContentTextAppearance</item>
+        <item name="android:textAppearanceMedium">@style/DialogContentTextAppearance</item>
+        <item name="android:textAppearanceInverse">@android:style/TextAppearance.Holo.Inverse</item>
+        <!--
+        <item name="listPreferredItemPaddingLeft">16dip</item>
+        <item name="listPreferredItemPaddingRight">16dip</item>
+        <item name="listPreferredItemPaddingStart">16dip</item>
+        <item name="android:listPreferredItemPaddingEnd">16dip</item>
+
+        <item name="preferencePanelStyle">@style/PreferencePanel.Dialog</item>
+
+        -->
+    </style>
+    <style name="Dialog.Alert" parent="Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowTitleStyle">@style/DialogTitleLight</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
+        <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
+    </style>
+    <!-- From: file:/E:/Personal/app/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="DialogContentTextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="DialogTitleBackground">
+        <item name="android:background">@color/darkdarkblue</item>
+        <item name="android:height">30dp</item>
+    </style>
+    <style name="DialogTitleLight">
+        <item name="android:maxLines">1</item>
+        <item name="android:scrollHorizontally">true</item>
+        <item name="android:textAppearance">@style/DialogTitleTextAppearance</item>
+        <item name="android:height">30dp</item>
+        <item name="android:shadowRadius">1</item>
+    </style>
+    <style name="DialogTitleTextAppearance">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/greenblue</item>
+    </style>
+    <style name="commonListView">
+        <item name="android:listSelector">@null</item>
+        <item name="android:cacheColorHint">#00000000</item>
+        <item name="android:divider">@color/lightgrey</item>
+        <item name="android:dividerHeight">0.5dp</item>
+    </style>
+    <!-- From: file:/E:/Personal/app/src/main/res/values/themes.xml -->
+    <eat-comment/>
+    <style name="dialog" parent="@android:style/Theme.Holo.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+</resources>
