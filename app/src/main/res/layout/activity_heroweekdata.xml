@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:warren="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.warren.lolbox.widget.TitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/darkblue"
+        android:orientation="horizontal"
+        warren:left_img="@drawable/lolbox_titleview_return_default"
+        warren:title="一周数据" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/lightgrey">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:orientation="horizontal"
+                android:background="@color/darkdarkblue">
+                <View
+                    android:id="@+id/v_spliter"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/lightgrey"
+                    android:layout_width="0.5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_height="match_parent">
+                </View>
+                <TextView
+                    android:id="@+id/tv_occurange"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_horizontal|bottom"
+                    android:layout_toLeftOf="@id/v_spliter"
+                    android:textColor="@color/lightgrey"
+                    android:text="登场排名"
+                    />
+                <TextView
+                    android:id="@+id/tv_occurace_rank"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:layout_toLeftOf="@id/v_spliter"
+                    android:textColor="@color/bluegreen"
+                    android:layout_below="@id/tv_occurange"
+                    android:textSize="30sp"
+                    android:text="80" />
+                <TextView
+                    android:id="@+id/tv_win"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_horizontal|bottom"
+                    android:layout_toRightOf="@id/v_spliter"
+                    android:textColor="@color/lightgrey"
+                    android:text="平均胜率"
+                    />
+                <TextView
+                    android:id="@+id/tv_winrate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:layout_toRightOf="@id/v_spliter"
+                    android:textColor="@color/bluegreen"
+                    android:layout_below="@id/tv_win"
+                    android:textSize="30sp"
+                    android:text="80" />
+            </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textColor="@color/bluegreen"
+            android:text="一周每日出场率"
+            android:textSize="16sp"
+            android:gravity="center_vertical|center_horizontal"/>
+        <LinearLayout
+            android:id="@+id/ll_everydayoccu_rate"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="160dp"></LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="@color/bluegreen"
+                android:text="一周各段位出场率"
+                android:textSize="16sp"
+                android:gravity="center_vertical|center_horizontal"/>
+            <LinearLayout
+                android:id="@+id/ll_everyrankoccu_rate"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="160dp"></LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="@color/bluegreen"
+                android:text="一周各段位胜率"
+                android:textSize="16sp"
+                android:gravity="center_vertical|center_horizontal"/>
+            <LinearLayout
+                android:id="@+id/ll_eachrankwin_rate"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="160dp"></LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+</LinearLayout>

@@ -219,8 +219,10 @@ public class HeroDetailActivity extends BaseActivity {
      * 打开英雄一周数据界面
      */
     private void openWeekData(){
-        Toast.makeText(HeroDetailActivity.this, "正在开发中", Toast.LENGTH_SHORT).show();
-    }
+		Intent it = new Intent(HeroDetailActivity.this, HeroWeekDataActivity.class);
+		it.putExtra(HeroWeekDataActivity.EXTRA_HEROID, mHero.getId());
+		startActivity(it);
+	}
 
     /**
      * 打开英雄更新历史界面

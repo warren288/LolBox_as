@@ -85,7 +85,7 @@
             android:configChanges="orientation|screenSize|keyboardHidden" >
         </activity>
         <activity
-            android:name="com.warren.lolbox.SummonerSkillActivity"
+            android:name="com.warren.lolbox.SummonerAbilityActivity"
             android:configChanges="orientation|screenSize|keyboardHidden" >
         </activity>
         <activity
@@ -150,6 +150,10 @@
         </activity>
         <activity
             android:name="com.warren.lolbox.HeroUpdateHistoryActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.warren.lolbox.HeroWeekDataActivity"
             android:configChanges="orientation|screenSize|keyboardHidden" >
         </activity>
     </application>

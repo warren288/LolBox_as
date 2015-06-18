@@ -15,7 +15,7 @@ ADDED from AndroidManifest.xml:1:1
 		ADDED from AndroidManifest.xml:1:11
 uses-sdk
 ADDED from AndroidManifest.xml:6:5
-MERGED from com.android.support:support-v4:21.0.3:15:5
+MERGED from com.android.support:support-v4:22.2.0:20:5
 	android:targetSdkVersion
 		ADDED from AndroidManifest.xml:8:9
 		INJECTED from AndroidManifest.xml:0:0
@@ -86,7 +86,7 @@ ADDED from AndroidManifest.xml:27:5
 		ADDED from AndroidManifest.xml:27:22
 application
 ADDED from AndroidManifest.xml:30:5
-MERGED from com.android.support:support-v4:21.0.3:16:5
+MERGED from com.android.support:support-v4:22.2.0:22:5
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:36:9
 	android:label
@@ -279,3 +279,9 @@ ADDED from AndroidManifest.xml:151:9
 		ADDED from AndroidManifest.xml:153:13
 	android:name
 		ADDED from AndroidManifest.xml:152:13
+activity#com.warren.lolbox.HeroWeekDataActivity
+ADDED from AndroidManifest.xml:155:9
+	android:configChanges
+		ADDED from AndroidManifest.xml:157:13
+	android:name
+		ADDED from AndroidManifest.xml:156:13

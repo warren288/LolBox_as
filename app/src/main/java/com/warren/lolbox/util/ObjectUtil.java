@@ -21,7 +21,18 @@ import com.warren.lolbox.model.ICompare;
  * @date 2014-8-28
  */
 public class ObjectUtil {
-	
+
+	public static double getMax(double[] arrd){
+		double d = 0;
+		for( double dd : arrd){
+			if( dd > d){
+				d = dd;
+			}
+		}
+		return d;
+	}
+
+
 	/**
 	 * {@link Map}的字符串表示
 	 * @param map
@@ -133,7 +144,7 @@ public class ObjectUtil {
 	
 	/**
 	 * 取对象在数组中的位置，使用专用的自定义比较器
-	 * @param list
+	 * @param arr
 	 * @param obj
 	 * @param comparator
 	 * @return

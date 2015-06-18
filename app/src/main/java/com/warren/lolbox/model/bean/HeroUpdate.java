@@ -1,7 +1,7 @@
 package com.warren.lolbox.model.bean;
 
 /**
- * Ӣ�۸��¼�¼
+ * 英雄更新数据
  * @author:yangsheng
  * @date:2015/6/9
  */

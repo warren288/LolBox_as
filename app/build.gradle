@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
+    compileSdkVersion 22
     buildToolsVersion "23.0.0 rc2"
 
     defaultConfig {
         applicationId "com.warren.lolbox"
         minSdkVersion 15
-        targetSdkVersion 21
+        targetSdkVersion 22
     }
 
     buildTypes {
@@ -28,10 +28,11 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:21.0.3'
+    compile 'com.android.support:support-v4:22.2.0'
     compile files('libs/android-async-http-1.4.4.jar')
     compile files('libs/htmlparser.jar')
     compile files('libs/jackson-core-lgpl-1.9.5.jar')
     compile files('libs/jackson-mapper-lgpl-1.9.5.jar')
     compile files('libs/universal-image-loader-1.9.3.jar')
+    compile files('libs/achartengine-1.1.0.jar')
 }

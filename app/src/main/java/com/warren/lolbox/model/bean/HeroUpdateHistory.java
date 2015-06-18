@@ -3,7 +3,7 @@ package com.warren.lolbox.model.bean;
 import java.util.List;
 
 /**
- * 英雄更新历史
+ * 鑻遍泟鏇存柊鍘嗗彶
  * @author:yangsheng
  * @date:2015/6/9
  */

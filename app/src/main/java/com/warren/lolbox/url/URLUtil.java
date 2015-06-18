@@ -307,11 +307,11 @@ public class URLUtil {
 
 	/**
 	 * 英雄每周数据
-	 * @param nHeroId 英雄id
+	 * @param strHeroId 英雄id
 	 * @return
 	 */
-	public static final String getUrl_HeroWeekData(int nHeroId){
-		return String.format(Locale.CHINA, "http://box.dwstatic.com/apiHeroWeekData.php?heroId=%d", nHeroId);
+	public static final String getUrl_HeroWeekData(String strHeroId){
+		return String.format(Locale.CHINA, "http://box.dwstatic.com/apiHeroWeekData.php?heroId=%s", strHeroId);
 	}
 
 	/**
