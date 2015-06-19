@@ -104,13 +104,14 @@ public class HeroWeekDataActivity extends BaseActivity {
         catagories.add(arrcata);
         values.add(arrRate);//第一种柱子的数值
         XYMultipleSeriesDataset dataset = cem.buildBarDataset(titles, catagories, values);
-
+        //多玩数据传回来的值可能是 45这种，可能是143这种，可能是 5590这种，可能是其服务器上各类比值的计算方式不同导致，
+        //这里仿照其官方应用的显示方式。
         double maxrate = ObjectUtil.getMax(arrRate);
         double dYmax = 1;
-        if(maxrate > 1 && maxrate < 2){
-            dYmax = 2;
-        } else if (maxrate > 10 && maxrate < 100){
-            dYmax = 100;
+        if(maxrate > 1 && maxrate <= 10){
+            dYmax = (int) maxrate + 1;
+        } else if (maxrate > 10){
+            dYmax = ((int)(maxrate / 10) + 1) * 10;
         }
 
         int[] colors = new int[] {Color.parseColor("#" + heroWeekRate.getColor())};
