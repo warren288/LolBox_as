@@ -19,6 +19,7 @@ import com.warren.lolbox.model.SelectPopWindow;
 import com.warren.lolbox.model.SimpleUserTool;
 import com.warren.lolbox.model.bean.Hero;
 import com.warren.lolbox.model.bean.HeroAbility;
+import com.warren.lolbox.storage.UserManager;
 import com.warren.lolbox.url.DuowanConfig.EnumAbility;
 import com.warren.lolbox.url.DuowanConfig.EnumDPI;
 import com.warren.lolbox.url.URLUtil;
@@ -43,6 +44,7 @@ public class HeroDetailActivity extends BaseActivity {
 	private TitleBar mTb;
 	private ImageView mImgHero;
 	private TextView mTvHeroName;
+	private ImageView mImgFavorate;
 	private TextView mTvTag;
 	private TextView mTvPrice;
 	private Button mBtnComment;
@@ -99,6 +101,8 @@ public class HeroDetailActivity extends BaseActivity {
 	private String mStrHeroEnName;
 
 	private Hero mHero;
+	private boolean mIsFavOri;
+	private boolean mIsFavCur;
 
 	private String[] mArrAbilitysDes = new String[5];
 
@@ -123,6 +127,7 @@ public class HeroDetailActivity extends BaseActivity {
 
 		mImgHero = (ImageView) findViewById(R.id.img_hero);
 		mTvHeroName = (TextView) findViewById(R.id.tv_heroname);
+		mImgFavorate = (ImageView) findViewById(R.id.img_favorate);
 		mTvTag = (TextView) findViewById(R.id.tv_tag);
 		mTvPrice = (TextView) findViewById(R.id.tv_price);
 		mBtnComment = (Button) findViewById(R.id.btn_comment);
@@ -193,7 +198,7 @@ public class HeroDetailActivity extends BaseActivity {
 			public void onCall(String t) {
 				if ("出装".equals(t)) {
 					BaseKitManager.openHeroZbTatic(HeroDetailActivity.this, mStrHeroEnName);
-				} else if ("更多".equals(t)){
+				} else if ("更多".equals(t)) {
 //					Toast.makeText(HeroDetailActivity.this, "功能尚在开发中……", Toast.LENGTH_SHORT).show();
 					SelectPopWindow.create(mTb, mLstSut, mTb.getWidth(), 0).show();
 				}
@@ -211,6 +216,18 @@ public class HeroDetailActivity extends BaseActivity {
 			public void onClick(View v) {
 
 				BaseKitManager.openUrl(HeroDetailActivity.this, URLUtil.getUrl_HeroComment(mStrHeroEnName, "hot"));
+			}
+		});
+
+		mImgFavorate.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(mIsFavCur){
+					mImgFavorate.setImageResource(R.drawable.icon_no_faverate);
+				}else{
+					mImgFavorate.setImageResource(R.drawable.icon_is_faverate);
+				}
+				mIsFavCur = ! mIsFavCur;
 			}
 		});
 	}
@@ -326,6 +343,11 @@ public class HeroDetailActivity extends BaseActivity {
 		String strAbility = "攻" + mHero.getRatingAttack() + " 法" + mHero.getRatingMagic() + " 防"
 					+ mHero.getRatingDefense() + " 难" + mHero.getRatingDifficulty();
 
+		UserManager um = UserManager.getInstance();
+		mIsFavOri = um.isFavorateHero(mHero.getId());
+		mIsFavCur = mIsFavOri;
+		mImgFavorate.setImageResource(mIsFavOri
+				? R.drawable.icon_is_faverate : R.drawable.icon_no_faverate);
 		mTvHeroName.setText(mHero.getDisplayName());
 		mTvTag.setText(mHero.getTags());
 		mTvPrice.setText(strPrice);
@@ -587,6 +609,22 @@ public class HeroDetailActivity extends BaseActivity {
 
 		}
 
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+	}
+
+	@Override
+	protected void onDestroy() {
+		UserManager um = UserManager.getInstance();
+		if(mIsFavCur && !mIsFavOri){
+			um.addFavorateHero(mHero.getId(), mHero.getName());
+		}else if(mIsFavOri && !mIsFavCur){
+			um.delFavorateHero(mHero.getId());
+		}
+		super.onDestroy();
 	}
 
 	@Override

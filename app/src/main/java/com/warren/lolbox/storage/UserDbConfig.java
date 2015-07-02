@@ -12,5 +12,11 @@ public class UserDbConfig {
 	public static final String FLD_SEARCH_HISTORY_SERVER = "SERVER";
 	public static final String FLD_SEARCH_HISTORY_SUMMONER = "SUMMONER";
 	public static final String FLD_SEARCH_HISTORY_TIME = "TIME";
+
+	public static final String TBL_FAVORATE_HERO = "FAVORATE_HERO";
+	public static final String FLD_FAVORATE_HERO_ID = "ID";
+	public static final String FLD_FAVORATE_HERO_HEROID = "HEROID";
+	public static final String FLD_FAVORATE_HERO_HERONAME = "HERONAME";
+	public static final String FLD_FAVORATE_HERO_TIME = "TIME";
 	
 }

@@ -29,6 +29,7 @@ public class UserManager {
 	private static final String DBPATH = Environment.getExternalStorageDirectory().getPath()
 				+ "/LolBox_warren/user.db";
 	private static final int VERSION = 1;
+	private static final int VERSION_ADDFAVHERO = 2;
 
 	public static UserManager getInstance() {
 		if (um == null) {
@@ -50,12 +51,12 @@ public class UserManager {
 				LogTool.exception(e);
 			}
 		}
-		mUdl = new UserDbHelper(AppContext.getApp(), DBPATH, VERSION);
+		mUdl = new UserDbHelper(AppContext.getApp(), DBPATH, VERSION_ADDFAVHERO);
 	}
 
 	/**
 	 * 取查询记录
-	 * @return
+	 * @return 查询记录，查询结果中每一条格式为： "服务器名,召唤师名"
 	 */
 	public List<String> getSearchHistory(){
 		
@@ -73,6 +74,7 @@ public class UserManager {
 			lstHistory.add(cursor.getString(0) + "," + cursor.getString(1));
 			cursor.moveToNext();
 		}
+		db.close();
 		return lstHistory;
 	}
 	
@@ -90,7 +92,81 @@ public class UserManager {
 		values.put(UserDbConfig.FLD_SEARCH_HISTORY_SERVER, strServer);
 		values.put(UserDbConfig.FLD_SEARCH_HISTORY_SUMMONER, strSummoner);
 		long i = db.insert(UserDbConfig.TBL_SEARCH_HISTORY, null, values);
+		db.close();
 		return i;
+	}
+
+	/**
+	 * 指定英雄是否收藏英雄
+	 * @param strHeroId
+	 * @return
+	 */
+	public boolean isFavorateHero(String strHeroId){
+		SQLiteDatabase db = mUdl.getReadableDatabase();
+		String strWhere = UserDbConfig.FLD_FAVORATE_HERO_HEROID + " = '" + strHeroId + "'";
+		Cursor cursor = db.query(UserDbConfig.TBL_FAVORATE_HERO, null, strWhere, null, null, null, null);
+		boolean isFav = false;
+		if(cursor.getCount()== 0){
+			isFav = false;
+		}else{
+			isFav = true;
+		}
+		cursor.close();
+		db.close();
+		return isFav;
+	}
+
+	/**
+	 * 添加一个收藏英雄
+	 * @param strHeroId
+	 * @param strHeroName
+	 * @return
+	 */
+	public long addFavorateHero(String strHeroId, String strHeroName){
+		SQLiteDatabase db = mUdl.getReadableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(UserDbConfig.FLD_FAVORATE_HERO_ID, strHeroId);
+		values.put(UserDbConfig.FLD_FAVORATE_HERO_HERONAME, strHeroName);
+		long i = db.insert(UserDbConfig.TBL_FAVORATE_HERO, null, values);
+		db.close();
+		return i;
+	}
+
+	/**
+	 * 删除一个收藏英雄
+	 * @param strHeroId
+	 * @return
+	 */
+	public long delFavorateHero(String strHeroId){
+		SQLiteDatabase db = mUdl.getReadableDatabase();
+		String strWhere = UserDbConfig.FLD_FAVORATE_HERO_HEROID + " = '" + strHeroId + "'";
+		int i = db.delete(UserDbConfig.TBL_FAVORATE_HERO, strWhere, null);
+		db.close();
+		return i;
+	}
+
+	/**
+	 * 取收藏英雄列表
+	 * @return 返回列表每一项的格式为："英雄ID,英雄名称"
+	 */
+	public List<String> getFavorateHero(){
+
+		List<String> lstFavHero = new ArrayList<String>();
+		SQLiteDatabase db = mUdl.getReadableDatabase();
+		String[] columns = {UserDbConfig.FLD_FAVORATE_HERO_HEROID, UserDbConfig.FLD_FAVORATE_HERO_HERONAME};
+
+		Cursor cursor = db.query(UserDbConfig.TBL_FAVORATE_HERO, columns, null, null, null, null, UserDbConfig.FLD_FAVORATE_HERO_TIME);
+		if (cursor == null || cursor.getCount() <= 0){
+			return lstFavHero;
+		}
+		cursor.moveToFirst();
+		while(! cursor.isAfterLast()){
+			lstFavHero.add(cursor.getString(0) + "," + cursor.getString(1));
+			cursor.moveToNext();
+		}
+		return lstFavHero;
+
 	}
 	
 	
@@ -118,11 +194,25 @@ public class UserManager {
 						+ UserDbConfig.FLD_SEARCH_HISTORY_SERVER + " varchar(20), "
 						+ UserDbConfig.FLD_SEARCH_HISTORY_SUMMONER + " varchar(20),"
 									+ UserDbConfig.FLD_SEARCH_HISTORY_TIME + " varchar(20))";
+			String strCreateFavHero = "create table " + UserDbConfig.TBL_FAVORATE_HERO + "("
+					+ UserDbConfig.FLD_FAVORATE_HERO_ID + "INTEGER PRIMARY KEY, "
+					+ UserDbConfig.FLD_FAVORATE_HERO_HEROID + " varchar(20), "
+					+ UserDbConfig.FLD_FAVORATE_HERO_HERONAME + " varchar(20),"
+					+ UserDbConfig.FLD_FAVORATE_HERO_TIME + " varchar(20))";
 			db.execSQL(strCreate);
+			db.execSQL(strCreateFavHero);
 		}
 
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+			if (oldVersion == VERSION && newVersion == VERSION_ADDFAVHERO){
+				String strCreateFavHero = "create table " + UserDbConfig.TBL_FAVORATE_HERO + "("
+						+ UserDbConfig.FLD_FAVORATE_HERO_ID + "INTEGER PRIMARY KEY, "
+						+ UserDbConfig.FLD_FAVORATE_HERO_HEROID + " varchar(20), "
+						+ UserDbConfig.FLD_FAVORATE_HERO_HERONAME + " varchar(20),"
+						+ UserDbConfig.FLD_FAVORATE_HERO_TIME + " varchar(20))";
+				db.execSQL(strCreateFavHero);
+			}
 		}
 
 	}
