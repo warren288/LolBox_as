@@ -88,7 +88,7 @@ public class ToolFragment extends BaseFragment {
 					R.string.toolmenu_lottery);
 		SimpleTool stNews = new SimpleTool(R.drawable.tool_menu_news, R.string.toolmenu_boxnews);
 		SimpleTool stLiveShow = new SimpleTool(R.drawable.tool_menu_live,
-					R.string.toolmenu_liveshow);
+					R.string.toolmenu_keyword);
 		SimpleTool stReflectTest = new SimpleTool(R.drawable.tool_menu_video,
 					R.string.toolmenu_reflecttest);
 		SimpleTool stBaike = new SimpleTool(R.drawable.tool_menu_baike, R.string.toolmenu_baike);
@@ -192,7 +192,7 @@ public class ToolFragment extends BaseFragment {
 			@Override
 			public void onClick(View v) {
 				Intent it = new Intent(getActivity(), SearchSummonerActivity.class);
-				it.putExtra(SearchSummonerActivity.EXTRA_ISFORSETSUMMONER, true);
+				it.putExtra(SearchSummonerActivity.EXTRA_TYPE, SearchSummonerActivity.TYPE_ADDDEFAULT);
 				startActivity(it);
 			}
 		});
@@ -285,6 +285,12 @@ public class ToolFragment extends BaseFragment {
 			}
 			case 4:{
 				Intent it = new Intent(getActivity(), ShakeActivity.class);
+				startActivity(it);
+				break;
+			}
+			case 5:{
+				Intent it = new Intent(getActivity(), SearchSummonerActivity.class);
+				it.putExtra(SearchSummonerActivity.EXTRA_TYPE, SearchSummonerActivity.TYPE_SEARCHSUMMONERKEY);
 				startActivity(it);
 				break;
 			}

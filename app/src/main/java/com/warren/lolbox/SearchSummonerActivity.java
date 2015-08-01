@@ -38,13 +38,21 @@ import com.warren.lolbox.util.StringUtils;
 import com.warren.lolbox.widget.TitleBar;
 
 /**
- * 搜索召唤师详细信息Activity
+ * 召唤师查询界面
+ * 功能点：查询召唤师详情
+ * 			设置召唤师为默认召唤师
+ * 		查询召唤师的关键词
  * @author warren
  * @date 2014年12月28日
  */
 public class SearchSummonerActivity extends BaseActivity {
 
-	public static final String EXTRA_ISFORSETSUMMONER = "EXTRA_ISFORSETSUMMONER";
+	public static final String EXTRA_TYPE = "TYPE";
+	public static final int TYPE_SEARCHSUMMONER = 1;
+	public static final int TYPE_ADDDEFAULT = 2;
+	public static final int TYPE_SEARCHSUMMONERKEY = 3;
+
+//	public static final String EXTRA_ISFORSETSUMMONER = "EXTRA_ISFORSETSUMMONER";
 
 	String strUrl = "http://zdl.mbox.duowan.com/phone/playerDetailNew.php?"
 				+ "sn=%E7%94%B5%E4%BF%A1%E5%8D%81%E5%9B%9B&pn=%E8%BF%98%E5%9C%A8%E7%AD%89%E5%BE%85";
@@ -68,13 +76,15 @@ public class SearchSummonerActivity extends BaseActivity {
 	private AdapterList mAdapter;
 
 	private int mServerIndex = 0;
-
-	private boolean mIsForSetSummoner = false;
+	private int mType = TYPE_SEARCHSUMMONER;
+	private IListener<Object> mListener;
+//	private boolean mIsForSetSummoner = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mIsForSetSummoner = getIntent().getBooleanExtra(EXTRA_ISFORSETSUMMONER, false);
+		mType = getIntent().getIntExtra(EXTRA_TYPE, TYPE_SEARCHSUMMONER);
+//		mIsForSetSummoner = getIntent().getBooleanExtra(EXTRA_ISFORSETSUMMONER, false);
 		setContentView(R.layout.activity_searchsummoner);
 		initCtrl();
 	}
@@ -90,13 +100,91 @@ public class SearchSummonerActivity extends BaseActivity {
 		mAdapter = new AdapterList(getLayoutInflater());
 		mLvHistory.setAdapter(mAdapter);
 
-		if (mIsForSetSummoner) {
-			mTb.setText("设置默认召唤师");
-			mBtnSearch.setText("设置");
-		} else {
-			mTb.setText("搜索");
-			mBtnSearch.setText("搜索");
+		String strBtnText = "查询";
+		String strTitleText = "查询";
+		mListener = new IListener<Object>() {
+			@Override
+			public void onCall(Object o) {
+				startSearch(mEtSummonerName.getText().toString().trim(),
+						arrServers[mServerIndex]);
+			}
+		};
+		switch (mType){
+			case TYPE_SEARCHSUMMONER:
+				break;
+			case TYPE_ADDDEFAULT:
+				strBtnText = "设置默认召唤师";
+				strTitleText = "设置";
+				mListener = new IListener<Object>() {
+					@Override
+					public void onCall(Object o) {
+
+						// 设置默认召唤师
+						String strUrl = URLUtil.getURL_SummonerInfo(mEtSummonerName.getText()
+								.toString().trim(), arrServers[mServerIndex]);
+						httpGet(strUrl, SystemConfig.getIntance().getCommHead(),
+								new IListener<String>() {
+
+									@Override
+									public void onCall(String strJson) {
+										if (StringUtils.isNullOrZero(strJson)) {
+											Toast.makeText(SearchSummonerActivity.this, "查询召唤师失败",
+													Toast.LENGTH_SHORT).show();
+											return;
+										}
+										jsonParseMap(
+												strJson,
+												new IListener<Map<String, HashMap<String, Object>>>() {
+
+													@Override
+													public void onCall(
+															Map<String, HashMap<String, Object>> map) {
+														if (map == null
+																|| !map.containsKey(mEtSummonerName
+																.getText()
+																.toString()
+																.trim())) {
+															Toast.makeText(
+																	SearchSummonerActivity.this,
+																	"查询召唤师失败",
+																	Toast.LENGTH_SHORT)
+																	.show();
+															return;
+														}
+
+														SystemConfig.getIntance()
+																.setDefaultSummonerName(
+																		mEtSummonerName
+																				.getText()
+																				.toString()
+																				.trim());
+														SystemConfig.getIntance()
+																.setDefaultSummonerServer(
+																		arrServers[mServerIndex]);
+
+														finish();
+													}
+												});
+									}
+								});
+					}
+				};
+				break;
+			case TYPE_SEARCHSUMMONERKEY:
+				strBtnText = "查询";
+				strTitleText = "查询关键词";
+				mListener = new IListener<Object>() {
+					@Override
+					public void onCall(Object o) {
+						BaseKitManager.openUrl(SearchSummonerActivity.this,
+								URLUtil.getUrl_SummonerKey(arrServers[mServerIndex],
+										mEtSummonerName.getText().toString().trim()));
+					}
+				};
+				break;
 		}
+		mTb.setText(strTitleText);
+		mBtnSearch.setText(strBtnText);
 
 		showSearchHistory();
 
@@ -125,60 +213,7 @@ public class SearchSummonerActivity extends BaseActivity {
 								.show();
 					return;
 				}
-				if (mIsForSetSummoner) {
-					// 设置默认召唤师
-					String strUrl = URLUtil.getURL_SummonerInfo(mEtSummonerName.getText()
-								.toString().trim(), arrServers[mServerIndex]);
-					httpGet(strUrl, SystemConfig.getIntance().getCommHead(),
-								new IListener<String>() {
-
-									@Override
-									public void onCall(String strJson) {
-										if (StringUtils.isNullOrZero(strJson)) {
-											Toast.makeText(SearchSummonerActivity.this, "查询召唤师失败",
-														Toast.LENGTH_SHORT).show();
-											return;
-										}
-										jsonParseMap(
-													strJson,
-													new IListener<Map<String, HashMap<String, Object>>>() {
-
-														@Override
-														public void onCall(
-																	Map<String, HashMap<String, Object>> map) {
-															if (map == null
-																		|| !map.containsKey(mEtSummonerName
-																					.getText()
-																					.toString()
-																					.trim())) {
-																Toast.makeText(
-																			SearchSummonerActivity.this,
-																			"查询召唤师失败",
-																			Toast.LENGTH_SHORT)
-																			.show();
-																return;
-															}
-
-															SystemConfig.getIntance()
-																		.setDefaultSummonerName(
-																					mEtSummonerName
-																								.getText()
-																								.toString()
-																								.trim());
-															SystemConfig.getIntance()
-																		.setDefaultSummonerServer(
-																					arrServers[mServerIndex]);
-
-															finish();
-														}
-													});
-									}
-								});
-				} else {
-					// 查询召唤师信息
-					startSearch(mEtSummonerName.getText().toString().trim(),
-								arrServers[mServerIndex]);
-				}
+				mListener.onCall(null);
 			}
 		});
 
@@ -188,9 +223,7 @@ public class SearchSummonerActivity extends BaseActivity {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				String searchhistory = mLstSearchHistory.get(position);
 				String[] arr = searchhistory.split(",");
-				if (mIsForSetSummoner) {
-
-				} else {
+				if(mType == TYPE_SEARCHSUMMONER){
 					startSearch(arr[1], arr[0]);
 				}
 			}
@@ -201,9 +234,7 @@ public class SearchSummonerActivity extends BaseActivity {
 	 * 显示查询历史纪录
 	 */
 	private void showSearchHistory() {
-		if (mIsForSetSummoner) {
-
-		} else {
+		if(mType == TYPE_SEARCHSUMMONER){
 			UserManager um = UserManager.getInstance();
 			mLstSearchHistory = um.getSearchHistory();
 			updateHistory();
@@ -219,9 +250,7 @@ public class SearchSummonerActivity extends BaseActivity {
 		if (mLstSearchHistory.contains(strServer + "," + strSummoner)) {
 			return;
 		}
-		if (mIsForSetSummoner) {
-
-		} else {
+		if(mType == TYPE_SEARCHSUMMONER){
 			UserManager um = UserManager.getInstance();
 			um.addSearchHistory(strServer, strSummoner);
 			mLstSearchHistory.add(strServer + "," + strSummoner);

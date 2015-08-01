@@ -41,6 +41,11 @@ public class ImageGroup extends LinearLayout {
 		initCtrl(attrs);
 	}
 
+
+	public ImageGroup(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes){
+		this(context, attrs, defStyleAttr);
+	}
+
 	public ImageGroup(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		initCtrl(attrs);
@@ -52,8 +57,7 @@ public class ImageGroup extends LinearLayout {
 		mImgCount = a.getInteger(R.styleable.ImageGroup_img_count, DEFAULT_COUNT);
 		mStateEnable = a.getBoolean(R.styleable.ImageGroup_img_state_enable, false);
 		mDrawableForeground = a.getDrawable(R.styleable.ImageGroup_img_state_foreground);
-		a.recycle();
-		
+
 		mImgParam = new LayoutParams(a.getDimensionPixelSize(R.styleable.ImageGroup_img_height,
 					DEFAULT_HEIGHT), a.getDimensionPixelSize(R.styleable.ImageGroup_img_height,
 					DEFAULT_HEIGHT));
@@ -82,6 +86,8 @@ public class ImageGroup extends LinearLayout {
 				}
 			});
 		}
+		a.recycle();
+
 	}
 
 	/**

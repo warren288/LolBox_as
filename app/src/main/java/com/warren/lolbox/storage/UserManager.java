@@ -126,7 +126,7 @@ public class UserManager {
 		SQLiteDatabase db = mUdl.getReadableDatabase();
 
 		ContentValues values = new ContentValues();
-		values.put(UserDbConfig.FLD_FAVORATE_HERO_ID, strHeroId);
+		values.put(UserDbConfig.FLD_FAVORATE_HERO_HEROID, strHeroId);
 		values.put(UserDbConfig.FLD_FAVORATE_HERO_HERONAME, strHeroName);
 		long i = db.insert(UserDbConfig.TBL_FAVORATE_HERO, null, values);
 		db.close();

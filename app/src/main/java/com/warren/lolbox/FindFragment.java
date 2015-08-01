@@ -79,7 +79,7 @@ public class FindFragment extends BaseFragment {
 				}
 				case 1: {
 					Intent it = new Intent(getActivity(), SearchSummonerActivity.class);
-					it.putExtra(SearchSummonerActivity.EXTRA_ISFORSETSUMMONER, true);
+					it.putExtra(SearchSummonerActivity.EXTRA_TYPE, SearchSummonerActivity.TYPE_ADDDEFAULT);
 					startActivity(it);
 					break;
 				}

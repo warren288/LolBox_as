@@ -322,4 +322,20 @@ public class URLUtil {
 	public static final String getUrl_HeroUpdateHistory(String strHeroEngName){
 		return String.format(Locale.CHINA, "http://box.dwstatic.com/apiHeroHistory.php?hero=%s", strHeroEngName);
 	}
+
+	/**
+	 * 召唤师关键字
+	 * @param strServer
+	 * @param strSummoner
+	 * @return
+	 */
+	public static final String getUrl_SummonerKey(String strServer, String strSummoner){
+		try {
+			return String.format(Locale.CHINA, "http://service.mbox.duowan.com/index.php?r=tags/show&server=%s&username=%s",
+                    URLEncoder.encode(strServer, "UTF-8"), URLEncoder.encode(strSummoner, "UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
