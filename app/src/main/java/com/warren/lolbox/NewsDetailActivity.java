@@ -51,6 +51,7 @@ public class NewsDetailActivity extends BaseActivity {
 
 	private void initCtrl() {
 		mTb = (TitleBar) findViewById(R.id.titlebar);
+		setTitleBar(mTb);
 		mWvDetail = (WebView) findViewById(R.id.wv_detail);
 
 		mListener = new IListener<String>() {
