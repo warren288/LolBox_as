@@ -25,7 +25,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.warren.lolbox.model.IListener;
+import com.warren.lolbox.model.SelectPopWindow;
 import com.warren.lolbox.model.SimpleTool;
+import com.warren.lolbox.model.SimpleUserTool;
 import com.warren.lolbox.model.bean.SummonerInfo;
 import com.warren.lolbox.url.URLUtil;
 import com.warren.lolbox.util.StringUtils;
@@ -60,6 +62,8 @@ public class ToolFragment extends BaseFragment {
 
 	private SummonerInfo mSummonerInfo;
 	private List<SimpleTool> mTools = new ArrayList<SimpleTool>();
+
+    private List<SimpleUserTool> mSut = new ArrayList<SimpleUserTool>();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -102,6 +106,15 @@ public class ToolFragment extends BaseFragment {
 		mTools.add(stVideo);
 		mTools.add(stLottery);
 		mTools.add(stReflectTest);
+
+        SimpleUserTool sutAddFav = new SimpleUserTool("设置默认", new IListener<String>() {
+            @Override
+            public void onCall(String s) {
+                openSummonerSearch(SearchSummonerActivity.TYPE_ADDDEFAULT);
+            }
+        });
+
+        mSut.add(sutAddFav);
 	}
 
 	private void initCtrl() {
@@ -134,7 +147,7 @@ public class ToolFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				openSummonerSearch();
+				openSummonerSearch(SearchSummonerActivity.TYPE_SEARCHSUMMONER);
 			}
 		});
 
@@ -142,25 +155,19 @@ public class ToolFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				// AlertDialog.Builder builder = new
-				// AlertDialog.Builder(getActivity(), R.style.Dialog_Alert);
-				//
-				// builder.setTitle("测试测试");
-				// builder.setMessage("测试内容\n测试内容2");
-				// builder.setPositiveButton("确定", null);
-				// builder.setNegativeButton("取消", null);
-				// builder.show();
 
-				new MessageDialog(getActivity()).setTitle("测试测试").setMessage("测试内容\n测试内容2")
-							.setPositiveButton("确定", null)
-							.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                SelectPopWindow.create(v, mSut).show();
 
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									Toast.makeText(getActivity(), "取消了", Toast.LENGTH_SHORT).show();
-								}
-
-							}).show();
+//				new MessageDialog(getActivity()).setTitle("测试测试").setMessage("测试内容\n测试内容2")
+//							.setPositiveButton("确定", null)
+//							.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//
+//								@Override
+//								public void onClick(DialogInterface dialog, int which) {
+//									Toast.makeText(getActivity(), "取消了", Toast.LENGTH_SHORT).show();
+//								}
+//
+//							}).show();
 
 			}
 		});
@@ -302,8 +309,9 @@ public class ToolFragment extends BaseFragment {
 	/**
 	 * 打开召唤师搜索界面
 	 */
-	private void openSummonerSearch() {
+	private void openSummonerSearch(int type) {
 		Intent it = new Intent(getActivity(), SearchSummonerActivity.class);
+        it.putExtra(SearchSummonerActivity.EXTRA_TYPE, type);
 		startActivity(it);
 		getActivity().overridePendingTransition(android.R.anim.slide_in_left,
 					android.R.anim.slide_out_right);

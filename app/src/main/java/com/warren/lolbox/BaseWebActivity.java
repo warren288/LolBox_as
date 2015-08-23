@@ -59,7 +59,7 @@ public class BaseWebActivity extends BaseActivity {
 		
 		mTb = (TitleBar) findViewById(R.id.titlebar);
 		mTb.setText(mStrTitle);
-
+		setTitleBar(mTb);
 		mWvContent = (WebView) findViewById(R.id.wv_content);
 
 		WebSettings wbSet = mWvContent.getSettings();
@@ -154,5 +154,15 @@ public class BaseWebActivity extends BaseActivity {
 			BaseKitManager.openUrl(BaseWebActivity.this, strUrl);
 			return true;
 		}
-	}
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+        }
+    }
 }

@@ -297,6 +297,18 @@ public class TitleBar extends RelativeLayout {
 		this.mImgRight.setOnClickListener(mRightClickListener);
 	}
 
+    /**
+     * 允许外部执行标题栏右侧按钮的点击事件
+     */
+	public boolean executeRightClick(){
+        if(this.mRightClickListener != null){
+            this.mRightClickListener.onClick(this.mImgRight);
+            return true;
+        } else{
+            return false;
+        }
+    }
+
 	/**
 	 * 设置标题栏标题的点击事件
 	 * @param listener

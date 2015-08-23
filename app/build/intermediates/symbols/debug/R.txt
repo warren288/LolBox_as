@@ -2,20 +2,28 @@ int anim slide_in_from_bottom 0x7f040000
 int anim slide_in_from_top 0x7f040001
 int anim slide_out_to_bottom 0x7f040002
 int anim slide_out_to_top 0x7f040003
+int attr column_count 0x7f01001c
+int attr column_count_landscape 0x7f01001e
+int attr column_count_portrait 0x7f01001d
 int attr contract_height 0x7f010000
 int attr count 0x7f010001
 int attr foreground_choosed 0x7f010002
 int attr foreground_unchoosed 0x7f010003
+int attr grid_paddingBottom 0x7f010023
+int attr grid_paddingLeft 0x7f010020
+int attr grid_paddingRight 0x7f010021
+int attr grid_paddingTop 0x7f010022
 int attr img_count 0x7f010005
 int attr img_height 0x7f010006
 int attr img_state_enable 0x7f010007
 int attr img_state_foreground 0x7f010008
 int attr img_width 0x7f010004
-int attr item_color 0x7f010027
-int attr item_color_select 0x7f010028
-int attr item_count 0x7f010026
-int attr left_img 0x7f01001e
-int attr left_imgbackground 0x7f010020
+int attr item_color 0x7f01002f
+int attr item_color_select 0x7f010030
+int attr item_count 0x7f01002e
+int attr item_margin 0x7f01001f
+int attr left_img 0x7f010026
+int attr left_imgbackground 0x7f010028
 int attr ptrAdapterViewBackground 0x7f010019
 int attr ptrAnimationStyle 0x7f010015
 int attr ptrDrawable 0x7f01000f
@@ -35,14 +43,14 @@ int attr ptrRotateDrawableWhilePulling 0x7f010018
 int attr ptrScrollingWhileRefreshingEnabled 0x7f010016
 int attr ptrShowIndicator 0x7f01000e
 int attr ptrSubHeaderTextAppearance 0x7f010014
-int attr right_img 0x7f01001f
-int attr right_imgbackground 0x7f010021
-int attr rightopers 0x7f010025
-int attr state_enable 0x7f01001c
-int attr state_foreground 0x7f01001d
-int attr title 0x7f010022
-int attr titleColor 0x7f010023
-int attr titleSize 0x7f010024
+int attr right_img 0x7f010027
+int attr right_imgbackground 0x7f010029
+int attr rightopers 0x7f01002d
+int attr state_enable 0x7f010024
+int attr state_foreground 0x7f010025
+int attr title 0x7f01002a
+int attr titleColor 0x7f01002b
+int attr titleSize 0x7f01002c
 int color bluegreen 0x7f050000
 int color darkblue 0x7f050001
 int color darkdarkblue 0x7f050002
@@ -969,10 +977,19 @@ int styleable PullToRefresh_ptrRotateDrawableWhilePulling 15
 int styleable PullToRefresh_ptrScrollingWhileRefreshingEnabled 13
 int styleable PullToRefresh_ptrShowIndicator 5
 int styleable PullToRefresh_ptrSubHeaderTextAppearance 11
-int[] styleable StatefulImageView { 0x7f01001c, 0x7f01001d }
+int[] styleable StaggeredGridView { 0x7f01001c, 0x7f01001d, 0x7f01001e, 0x7f01001f, 0x7f010020, 0x7f010021, 0x7f010022, 0x7f010023 }
+int styleable StaggeredGridView_column_count 0
+int styleable StaggeredGridView_column_count_landscape 2
+int styleable StaggeredGridView_column_count_portrait 1
+int styleable StaggeredGridView_grid_paddingBottom 7
+int styleable StaggeredGridView_grid_paddingLeft 4
+int styleable StaggeredGridView_grid_paddingRight 5
+int styleable StaggeredGridView_grid_paddingTop 6
+int styleable StaggeredGridView_item_margin 3
+int[] styleable StatefulImageView { 0x7f010024, 0x7f010025 }
 int styleable StatefulImageView_state_enable 0
 int styleable StatefulImageView_state_foreground 1
-int[] styleable TitleBar { 0x7f01001e, 0x7f01001f, 0x7f010020, 0x7f010021, 0x7f010022, 0x7f010023, 0x7f010024, 0x7f010025 }
+int[] styleable TitleBar { 0x7f010026, 0x7f010027, 0x7f010028, 0x7f010029, 0x7f01002a, 0x7f01002b, 0x7f01002c, 0x7f01002d }
 int styleable TitleBar_left_img 0
 int styleable TitleBar_left_imgbackground 2
 int styleable TitleBar_right_img 1
@@ -981,7 +998,7 @@ int styleable TitleBar_rightopers 7
 int styleable TitleBar_title 4
 int styleable TitleBar_titleColor 5
 int styleable TitleBar_titleSize 6
-int[] styleable ViewPagerIndicator { 0x7f010026, 0x7f010027, 0x7f010028 }
+int[] styleable ViewPagerIndicator { 0x7f01002e, 0x7f01002f, 0x7f010030 }
 int styleable ViewPagerIndicator_item_color 1
 int styleable ViewPagerIndicator_item_color_select 2
 int styleable ViewPagerIndicator_item_count 0

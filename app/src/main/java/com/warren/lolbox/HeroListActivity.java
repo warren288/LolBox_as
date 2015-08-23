@@ -2,7 +2,9 @@ package com.warren.lolbox;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import com.warren.lolbox.model.IListener;
 import com.warren.lolbox.model.bean.AllHeroList;
 import com.warren.lolbox.model.bean.FreeHeroList;
 import com.warren.lolbox.model.bean.HeroSimple;
+import com.warren.lolbox.storage.UserManager;
 import com.warren.lolbox.url.URLUtil;
 import com.warren.lolbox.widget.FragmentPagerAdapter;
 import com.warren.lolbox.widget.TitleBar;
@@ -103,6 +106,7 @@ public class HeroListActivity extends BaseActivity {
 							if (t != null) {
 								mLstHeroAll = t.getAll();
 							}
+							genLike();
 							checkStartInitFrags();
 						}
 					});
@@ -114,6 +118,30 @@ public class HeroListActivity extends BaseActivity {
 				finish();
 			}
 		});
+	}
+
+	/**
+	 * 根据全部英雄简单详情来查找收藏英雄
+	 */
+	private void genLike(){
+
+		if(mLstHeroAll == null || mLstHeroAll.size() == 0){
+			return;
+		}
+		UserManager um = UserManager.getInstance();
+		List<String> lstHero = um.getFavorateHero();
+		Set<String> setHeroName = new HashSet<String>();
+		for(String strHero : lstHero){
+			String strHeroName = strHero.split(",")[1];
+			setHeroName.add(strHeroName);
+		}
+		mLstHeroLike = new ArrayList<HeroSimple>();
+		for(HeroSimple hs : mLstHeroAll){
+			if(setHeroName.contains(hs.getEnName())){
+				mLstHeroLike.add(hs);
+			}
+		}
+
 	}
 
 	/**

@@ -18,6 +18,7 @@ import com.warren.lolbox.util.LogTool;
 
 /**
  * 用户信息管理器
+ * @caution 理论上说，数据库操作应该全部放在子线程中进行，然而我暂时懒得改！2015.08.23 yangsheng
  * @author yangsheng
  * @date 2015年5月2日
  */
@@ -142,7 +143,7 @@ public class UserManager {
 		SQLiteDatabase db = mUdl.getReadableDatabase();
 		String strWhere = UserDbConfig.FLD_FAVORATE_HERO_HEROID + " = '" + strHeroId + "'";
 		int i = db.delete(UserDbConfig.TBL_FAVORATE_HERO, strWhere, null);
-		db.close();
+
 		return i;
 	}
 
@@ -165,6 +166,7 @@ public class UserManager {
 			lstFavHero.add(cursor.getString(0) + "," + cursor.getString(1));
 			cursor.moveToNext();
 		}
+		cursor.close();
 		return lstFavHero;
 
 	}

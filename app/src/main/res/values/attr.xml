@@ -97,13 +97,13 @@
         <!--
             Whether PullToRefreshListView has it's extras enabled. This allows the user to be 
             able to scroll while refreshing, and behaves better. It acheives this by adding
-            Header and/or Footer Views to the ListView.
+            Header and/or Footer Views to the ListView.
         -->
         <attr name="ptrListViewExtrasEnabled" format="reference|boolean" />
 
         <!--
             Whether the Drawable should be continually rotated as you pull. This only
-            takes effect when using the 'Rotate' Animation Style.
+            takes effect when using the 'Rotate' Animation Style.
         -->
         <attr name="ptrRotateDrawableWhilePulling" format="reference|boolean" />
 
@@ -111,6 +111,16 @@
         <attr name="ptrAdapterViewBackground" format="reference|color" />
         <attr name="ptrDrawableTop" format="reference" />
         <attr name="ptrDrawableBottom" format="reference" />
-    </declare-styleable>
 
+    </declare-styleable>
+    <declare-styleable name="StaggeredGridView">
+        <attr name="column_count" format="integer" />
+        <attr name="column_count_portrait" format="integer" />
+        <attr name="column_count_landscape" format="integer" />
+        <attr name="item_margin" format="dimension" />
+        <attr name="grid_paddingLeft" format="dimension" />
+        <attr name="grid_paddingRight" format="dimension" />
+        <attr name="grid_paddingTop" format="dimension" />
+        <attr name="grid_paddingBottom" format="dimension" />
+    </declare-styleable>
 </resources>

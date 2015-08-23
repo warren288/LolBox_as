@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">好好学习</string>
+
+    <string name="title_first">首页</string>
+    <string name="title_add">添加</string>
+    <string name="title_set">设置</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+    <string name="author_set">设置用户名</string>
+    <string name="author_default">Warren Young</string>
+    <string name="action_settings">Settings</string>
+</resources>
