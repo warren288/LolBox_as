@@ -338,4 +338,21 @@ public class URLUtil {
 			return null;
 		}
 	}
+
+	/**
+	 * 天赋图Json
+	 * @return
+	 */
+	public static final String getUrl_GiftMap(){
+		return "http://lolbox.duowan.com/phone/apiGift.php";
+	}
+
+	/**
+	 * 天赋点图片
+	 * @param strGiftId
+	 * @return
+	 */
+	public static final String getUrl_GiftImg(String strGiftId){
+		return String.format(Locale.CHINA, "http://img.lolbox.duowan.com/gifts/%s.png", strGiftId);
+	}
 }

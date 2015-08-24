@@ -87,7 +87,7 @@ public class NewsFragment extends BaseFragment {
 		mIndicator.setViewPager(mPager, 0);
 	}
 
-	class AdapterViewPager extends PagerAdapter {
+	private class AdapterViewPager extends PagerAdapter {
 
 		private View[] arrViewRoot = new View[3];
 

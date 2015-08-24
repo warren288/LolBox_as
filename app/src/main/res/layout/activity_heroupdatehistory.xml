@@ -13,7 +13,7 @@
         android:orientation="horizontal"
         warren:left_img="@drawable/lolbox_titleview_return_default"
         warren:left_imgbackground="@drawable/bg_btn_title"
-        warren:title="英雄改动"
+        warren:titleText="英雄改动"
         warren:titleColor="@color/greenblue" />
 
     <ListView

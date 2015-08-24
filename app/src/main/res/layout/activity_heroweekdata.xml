@@ -12,7 +12,7 @@
         android:background="@color/darkblue"
         android:orientation="horizontal"
         warren:left_img="@drawable/lolbox_titleview_return_default"
-        warren:title="一周数据" />
+        warren:titleText="一周数据" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

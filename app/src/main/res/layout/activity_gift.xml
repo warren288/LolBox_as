@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.warren.lolbox.widget.TitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/darkblue"
+        android:orientation="horizontal"
+        app:left_img="@drawable/lolbox_titleview_return_default"
+        app:left_imgbackground="@drawable/bg_btn_title"
+        app:right_img="@drawable/box_more_icon"
+        app:right_imgbackground="@drawable/bg_btn_title"
+        app:titleText="天赋模拟器"
+        app:titleColor="@color/greenblue"
+        app:titleSize="9sp" />
+
+    <com.warren.lolbox.widget.ViewPagerIndicator
+        android:id="@+id/vpindicator"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/lightgrey"
+        android:orientation="horizontal"
+        app:item_color="@android:color/black"
+        app:item_color_select="@color/greenblue"
+        app:item_count="3" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

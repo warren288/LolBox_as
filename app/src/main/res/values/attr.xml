@@ -15,7 +15,7 @@
         <attr name="right_img" format="reference" />
         <attr name="left_imgbackground" format="reference|reference" />
         <attr name="right_imgbackground" format="reference|reference" />
-        <attr name="title" format="string|reference" />
+        <attr name="titleText" format="string|reference" />
         <attr name="titleColor" format="color|reference" />
         <attr name="titleSize" format="dimension" />
         <attr name="rightopers" format="string|reference" />

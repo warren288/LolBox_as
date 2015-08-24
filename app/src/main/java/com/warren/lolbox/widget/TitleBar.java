@@ -98,8 +98,8 @@ public class TitleBar extends RelativeLayout {
 		} else {
 			mImgRight.setVisibility(View.INVISIBLE);
 		}
-		if (a.getString(R.styleable.TitleBar_title) != null) {
-			mTvTitle.setText(a.getString(R.styleable.TitleBar_title));
+		if (a.getString(R.styleable.TitleBar_titleText) != null) {
+			mTvTitle.setText(a.getString(R.styleable.TitleBar_titleText));
 			mTvTitle.setVisibility(View.VISIBLE);
 		} else {
 			mTvTitle.setVisibility(View.INVISIBLE);
@@ -118,7 +118,9 @@ public class TitleBar extends RelativeLayout {
 
 				@Override
 				public void onClick(View v) {
-					((Activity) getContext()).finish();
+					if(getContext() instanceof  Activity){
+						((Activity) getContext()).finish();
+					}
 				}
 			};
 			mImgLeft.setOnClickListener(mLeftClickListener);

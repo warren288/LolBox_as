@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:warren="http://schemas.android.com/apk/res/com.warren.lolbox"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -11,8 +11,8 @@
         android:layout_height="45dp"
         android:background="@color/darkblue"
         android:orientation="horizontal"
-        warren:left_img="@drawable/lolbox_titleview_return_default"
-        warren:title="关于" />
+        app:left_img="@drawable/lolbox_titleview_return_default"
+        app:titleText="关于" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -25,21 +25,13 @@
 
             <ImageView
                 android:id="@+id/img_lolbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="fitCenter"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
-                android:src="@drawable/bg_dw_lolapp" />
+                android:layout_margin="60dp"
+                android:src="@drawable/icon" />
 
-            <TextView
-                android:id="@+id/tv_curversion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="5dp"
-                android:text="0.3"
-                android:textColor="@android:color/black"
-                android:textSize="12sp" />
 
             <ListView
                 android:id="@+id/lv_types"
@@ -48,14 +40,31 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" >
             </ListView>
-
+            <TextView
+                android:id="@+id/tv_appname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/app_name"
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/tv_curversion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/app_version"
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
             <TextView
                 android:id="@+id/tv_right"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/app_right"
+                android:textSize="10sp"
                 android:textColor="@android:color/black" />
         </LinearLayout>
 
