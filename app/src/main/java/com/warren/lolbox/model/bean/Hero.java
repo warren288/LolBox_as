@@ -8,7 +8,7 @@ import java.util.List;
  * @author warren
  * @date 2015年1月1日
  */
-public class Hero {
+public class Hero{
 
 	private String armorBase;
 	private String armorLevel;

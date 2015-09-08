@@ -5,8 +5,12 @@ import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.warren.lolbox.model.IListener;
+import com.warren.lolbox.model.bean.GiftMap;
+import com.warren.lolbox.url.URLUtil;
 import com.warren.lolbox.widget.GiftView;
 import com.warren.lolbox.widget.TitleBar;
 import com.warren.lolbox.widget.ViewPagerIndicator;
@@ -23,6 +27,7 @@ public class GiftActivity extends BaseActivity{
     private List<String> mLstTitle;
     private ViewPager mVp;
     private AdapterViewPager mAdapter;
+    private GiftMap mGiftMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +56,17 @@ public class GiftActivity extends BaseActivity{
         mVp.setAdapter(mAdapter);
         mVpi.setViewPager(mVp, 0);
 
+        requestData();
+    }
 
-
-
+    private void requestData(){
+        httpGetAndParse(URLUtil.getUrl_GiftMap(), null, GiftMap.class, new IListener<GiftMap>() {
+            @Override
+            public void onCall(GiftMap giftMap) {
+                mGiftMap = giftMap;
+                mAdapter.refresh();
+            }
+        });
     }
 
 
@@ -68,9 +81,18 @@ public class GiftActivity extends BaseActivity{
         private GiftView[] arrView = new GiftView[3];
 
         public AdapterViewPager() {
-            for (int i = 0; i < getCount(); i++) {
+            ViewGroup.MarginLayoutParams params = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            params.setMargins(20, 10, 20, 10);
+            for(int i = 0; i < 3; i++){
                 arrView[i] = new GiftView(GiftActivity.this);
+                arrView[i].setLayoutParams(params);
+                arrView[i].setPadding(10, 0, 10, 0);
             }
+        }
+        public void refresh(){
+            arrView[0].setData(mGiftMap.getA());
+            arrView[1].setData(mGiftMap.getD());
+            arrView[2].setData(mGiftMap.getG());
         }
 
         @Override

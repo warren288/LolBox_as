@@ -161,7 +161,10 @@
             android:name=".HeroWeekDataActivity"
             android:configChanges="orientation|screenSize|keyboardHidden" >
         </activity>
-
+        <activity
+            android:name=".HeroBackgroundActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden" >
+        </activity>
     </application>
 
 </manifest>

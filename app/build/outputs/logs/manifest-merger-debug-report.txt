@@ -303,3 +303,9 @@ ADDED from AndroidManifest.xml:160:9
 		ADDED from AndroidManifest.xml:162:13
 	android:name
 		ADDED from AndroidManifest.xml:161:13
+activity#com.warren.lolbox.HeroBackgroundActivity
+ADDED from AndroidManifest.xml:164:9
+	android:configChanges
+		ADDED from AndroidManifest.xml:166:13
+	android:name
+		ADDED from AndroidManifest.xml:165:13

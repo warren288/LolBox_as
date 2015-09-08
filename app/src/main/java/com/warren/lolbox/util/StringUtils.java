@@ -145,7 +145,6 @@ public final class StringUtils {
 	/**
 	 * 由文件夹路径取文件夹名称
 	 * @param strFilePath
-	 * @param isWithSuffix
 	 * @return
 	 */
 	public static String getDirectoryNameFromPath(final String strFilePath) {

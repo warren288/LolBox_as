@@ -1,6 +1,8 @@
 package com.warren.lolbox;
 
 import java.io.File;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import android.app.Application;
 import android.os.Environment;
@@ -22,8 +24,9 @@ public class AppContext extends Application {
 	private ImageLoader imgLoader;
 	private AppNetManager netManager;
 	private AppJsonParserManager jsonManager;
+    private Executor threadPool;
 
-	public static final String UIL_CACHEFOLDER = Environment.getExternalStorageDirectory()
+    public static final String UIL_CACHEFOLDER = Environment.getExternalStorageDirectory()
 				+ "/warrenlol/imageloader/cache/";
 	public static final String PICTURE_FOLDER = Environment.getExternalStorageDirectory()
 				+ "/warrenlol/picture/";
@@ -37,6 +40,8 @@ public class AppContext extends Application {
 		super.onCreate();
 		app = this;
 		init();
+
+
 	}
 
 	private void init() {
@@ -51,6 +56,8 @@ public class AppContext extends Application {
 
 		netManager = AppNetManager.getInstance();
 		jsonManager = AppJsonParserManager.getInstance();
+
+        threadPool = Executors.newFixedThreadPool(4);
 	}
 	
 	private void initFolder(){
@@ -75,4 +82,8 @@ public class AppContext extends Application {
 	public AppJsonParserManager getJsonManager() {
 		return jsonManager;
 	}
+
+    public void execute(Runnable run){
+        threadPool.execute(run);
+    }
 }

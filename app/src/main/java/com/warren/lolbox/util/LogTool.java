@@ -118,7 +118,6 @@ public class LogTool {
 			@Override
 			public void run() {
 				lockLog.lock();
-				
 				try {
 					File file = new File(strFilePath);
 					File fileParent = file.getParentFile();
@@ -130,12 +129,9 @@ public class LogTool {
 					}
 					FileWriter filewrt = new FileWriter(file, true);
 					String strTime = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.CHINA).format(new Date());
-					
 					String strAdd = strTime+ " : " + strText + "\r\n";
-
 					filewrt.append(strAdd);
 					filewrt.flush();
-					
 					filewrt.close();
 				} catch (IOException e) {
 					

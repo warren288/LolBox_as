@@ -3,14 +3,21 @@ package com.warren.lolbox;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.warren.lolbox.model.GestureListener;
 import com.warren.lolbox.model.IListener;
+import com.warren.lolbox.util.LogTool;
 import com.warren.lolbox.util.StringUtils;
 import com.warren.lolbox.widget.TitleBar;
 
@@ -27,9 +34,11 @@ public abstract class BaseActivity extends Activity {
     private TitleBar mTb;
     private boolean mIsFinished = false;
 
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		LogTool.i(getClass().getName(), "onCreate");
 	}
 
 	/**
@@ -86,12 +95,51 @@ public abstract class BaseActivity extends Activity {
 	}
 
     @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+        // 2015.9.8 activity默认右滑关闭。
+        // 暂未拦截子控件的滑动事件，有listview、gridview、viewpager等有默认滑动事件的控件的页面中，右滑关闭无效。
+        // 思路：使用自定义控件作为所有页面的根控件后才能实现。
+        ViewGroup vRoot = (ViewGroup)getWindow().getDecorView().findViewById(android.R.id.content);
+        vRoot.setLongClickable(true);
+
+        vRoot.setOnTouchListener(new GestureListener(this) {
+
+            @Override
+            public boolean left() {
+                return false;
+            }
+
+            @Override
+            public boolean right() {
+                finish();
+                return false;
+            }
+        });
+    }
+
+    @Override
+	protected void onResume() {
+		super.onResume();
+		LogTool.i(getClass().getName(), "onResume");
+
+	}
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LogTool.i(getClass().getName(), "onPause");
+    }
+
+	@Override
     protected void onDestroy() {
         this.mIsFinished = true;
         super.onDestroy();
+		LogTool.i(getClass().getName(), "onDestroy");
     }
 
-    /**
+
+	/**
      * 设置标题栏
      * @param tb
      */
@@ -174,16 +222,16 @@ public abstract class BaseActivity extends Activity {
 				final Class<T> cls, final IListener<List<T>> listener) {
 		httpGet(strUrl, headers, new IListener<String>() {
 
-            @Override
-            public void onCall(String strResult) {
-                if (StringUtils.isNullOrZero(strResult)) {
-                    listener.onCall(null);
-                    return;
-                }
+			@Override
+			public void onCall(String strResult) {
+				if (StringUtils.isNullOrZero(strResult)) {
+					listener.onCall(null);
+					return;
+				}
 
-                jsonParseList(strResult, cls, listener);
-            }
-        });
+				jsonParseList(strResult, cls, listener);
+			}
+		});
 	}
 
 	/**
@@ -195,13 +243,13 @@ public abstract class BaseActivity extends Activity {
 	public void httpGet(final String strUrl, final Map<String, String> headers,
 				final IListener<String> listener) {
 		AppContext.getApp().getNetManager().get(strUrl, headers, new IListener<String>() {
-            @Override
-            public void onCall(String s) {
-                if( ! isFinished()){
-                    listener.onCall(s);
-                }
-            }
-        });
+			@Override
+			public void onCall(String s) {
+				if (!isFinished()) {
+					listener.onCall(s);
+				}
+			}
+		});
 	}
 
 	/**
@@ -212,13 +260,13 @@ public abstract class BaseActivity extends Activity {
 	 */
 	public <T> void jsonParse(final String strJson, final Class<T> cls, final IListener<T> listener) {
 		AppContext.getApp().getJsonManager().parse(strJson, cls, new IListener<T>() {
-            @Override
-            public void onCall(T t) {
-                if( ! isFinished()){
-                    listener.onCall(t);
-                }
-            }
-        });
+			@Override
+			public void onCall(T t) {
+				if (!isFinished()) {
+					listener.onCall(t);
+				}
+			}
+		});
 	}
 
 	/**
@@ -230,13 +278,13 @@ public abstract class BaseActivity extends Activity {
 	public <T> void jsonParseList(final String strJson, final Class<T> cls,
 				final IListener<List<T>> listener) {
 		AppContext.getApp().getJsonManager().parseList(strJson, cls, new IListener<List<T>>() {
-            @Override
-            public void onCall(List<T> ts) {
-                if( ! isFinished()){
-                    listener.onCall(ts);
-                }
-            }
-        });
+			@Override
+			public void onCall(List<T> ts) {
+				if (!isFinished()) {
+					listener.onCall(ts);
+				}
+			}
+		});
 	}
 
 	/**
@@ -249,4 +297,5 @@ public abstract class BaseActivity extends Activity {
 
 		AppContext.getApp().getJsonManager().parseMap(strJson, listener);
 	}
+
 }

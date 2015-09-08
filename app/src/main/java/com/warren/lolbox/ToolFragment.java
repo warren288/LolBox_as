@@ -8,6 +8,7 @@ import java.util.Map;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -40,8 +41,6 @@ import com.warren.lolbox.widget.TitleBar;
  * @date 2014年12月28日
  */
 public class ToolFragment extends BaseFragment {
-
-	private static String LOGTAG = "ToolFragment";
 
 	private LinearLayout mLlRoot;
 	private TitleBar mTb;
@@ -113,8 +112,15 @@ public class ToolFragment extends BaseFragment {
                 openSummonerSearch(SearchSummonerActivity.TYPE_ADDDEFAULT);
             }
         });
+        SimpleUserTool sutRefreshSumm = new SimpleUserTool("刷新", new IListener<String>() {
+            @Override
+            public void onCall(String s) {
+                requestSummonerData();
+            }
+        });
 
         mSut.add(sutAddFav);
+        mSut.add(sutRefreshSumm);
 	}
 
 	private void initCtrl() {
@@ -156,7 +162,7 @@ public class ToolFragment extends BaseFragment {
 			@Override
 			public void onClick(View v) {
 
-                SelectPopWindow.create(v, mSut).show();
+				SelectPopWindow.create(v, mSut).show();
 
 //				new MessageDialog(getActivity()).setTitle("测试测试").setMessage("测试内容\n测试内容2")
 //							.setPositiveButton("确定", null)
@@ -177,6 +183,20 @@ public class ToolFragment extends BaseFragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				openGridActivity(position);
+			}
+		});
+
+		mRlSummonerRoot.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (mSummonerInfo != null) {
+					BaseKitManager.openSummonerDetail(
+							(BaseActivity) getActivity(),
+							URLUtil.getURL_SummonerDetail(mSummonerInfo.getPn(),
+									mSummonerInfo.getSn()));
+				}
+
 			}
 		});
 
@@ -210,6 +230,10 @@ public class ToolFragment extends BaseFragment {
 
 		final String strSummonerName = SystemConfig.getIntance().getDefaultSummonerName();
 		final String strSummonerServer = SystemConfig.getIntance().getDefaultSummonerServer();
+		if(TextUtils.isEmpty(strSummonerName) || TextUtils.isEmpty(strSummonerServer)){
+			Toast.makeText(getActivity(), "请设置默认召唤师", Toast.LENGTH_SHORT).show();
+			return;
+		}
 
 		httpGet(URLUtil.getURL_SummonerInfo(strSummonerName, strSummonerServer), SystemConfig
 				.getIntance().getCommHead(), new IListener<String>() {

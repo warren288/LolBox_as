@@ -29,7 +29,7 @@ public class FindFragment extends BaseFragment {
 	private TitleBar mTb;
 	private ListView mLvFind;
 
-	private String[] mArrFind = { "关于", "设置默认召唤师" };
+	private String[] mArrFind = { "关于", "设置默认召唤师" , "英雄列表"};
 
 	private AdapterList mAdapter;
 
@@ -82,6 +82,11 @@ public class FindFragment extends BaseFragment {
 					it.putExtra(SearchSummonerActivity.EXTRA_TYPE, SearchSummonerActivity.TYPE_ADDDEFAULT);
 					startActivity(it);
 					break;
+				}
+				case 2:{
+                    Intent it = new Intent(getActivity(), HeroBackgroundActivity.class);
+                    startActivity(it);
+                    break;
 				}
 				default:
 					break;

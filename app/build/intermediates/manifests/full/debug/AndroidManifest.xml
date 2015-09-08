@@ -161,6 +161,10 @@
             android:name="com.warren.lolbox.HeroWeekDataActivity"
             android:configChanges="orientation|screenSize|keyboardHidden" >
         </activity>
+        <activity
+            android:name="com.warren.lolbox.HeroBackgroundActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden" >
+        </activity>
     </application>
 
 </manifest>

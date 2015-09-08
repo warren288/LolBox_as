@@ -1,6 +1,10 @@
 package com.warren.lolbox.url;
 
+import com.warren.lolbox.model.bean.AllHeroList;
+
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author:yangsheng
@@ -19,4 +23,5 @@ public class DuowanUtil {
                 + time.getHours() + ":" + time.getMinutes();
         return strTime;
     }
+
 }

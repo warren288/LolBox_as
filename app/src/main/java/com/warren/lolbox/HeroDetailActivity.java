@@ -27,7 +27,6 @@ import com.warren.lolbox.util.DeviceUtil;
 import com.warren.lolbox.util.StringUtils;
 import com.warren.lolbox.widget.ImageGroup;
 import com.warren.lolbox.widget.TitleBar;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -288,7 +287,8 @@ public class HeroDetailActivity extends BaseActivity {
 							jsonParse(t, Hero.class, new IListener<Hero>() {
 
 								@Override
-								public void onCall(Hero t) {
+								public void onCall(final Hero t) {
+
 									mHero = t;
 									setView();
 								}
@@ -602,10 +602,11 @@ public class HeroDetailActivity extends BaseActivity {
 				return;
 			}
 
-			Intent it = new Intent(HeroDetailActivity.this, HeroDetailActivity.class);
-			it.putExtra(HeroDetailActivity.EXTRA_HEROENNAME, strHeroName);
-			HeroDetailActivity.this.startActivity(it);
-			overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+			BaseKitManager.openHeroDetail(HeroDetailActivity.this, strHeroName);
+//			Intent it = new Intent(HeroDetailActivity.this, HeroDetailActivity.class);
+//			it.putExtra(HeroDetailActivity.EXTRA_HEROENNAME, strHeroName);
+//			HeroDetailActivity.this.startActivity(it);
+//			overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 
 		}
 

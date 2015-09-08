@@ -7,7 +7,7 @@ import java.util.List;
  * @author warren
  * @date 2015年1月1日
  */
-public class AllHeroList {
+public class AllHeroList{
 	
 	private List<HeroSimple> all;
 	

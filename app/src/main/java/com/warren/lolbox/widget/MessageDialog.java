@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.warren.lolbox.R;
 
+import java.lang.reflect.Field;
+
 /**
  * 消息提示框
  * @author warren
@@ -31,7 +33,8 @@ public class MessageDialog {
 	private String mStrMessage;
 	private String mStrOk;
 	private String mStrCancel;
-	
+	private boolean mCancelableOutside;
+    private boolean mCancelableOnButton;
 	private ViewGroup mVRoot;
 	
 	private LinearLayout mLlTitlePanel;
@@ -86,9 +89,11 @@ public class MessageDialog {
 					@Override
 					public void onClick(View v) {
 						if(mListenerPostive != null){
-							mListenerPostive.onClick(mAlert, DialogInterface.BUTTON1);
+                            mListenerPostive.onClick(mAlert, DialogInterface.BUTTON1);
 						}
-						mAlert.dismiss();
+                        if(mCancelableOnButton){
+                            mAlert.dismiss();
+                        }
 					}
 				});
 			} else {
@@ -101,19 +106,21 @@ public class MessageDialog {
 					@Override
 					public void onClick(View v) {
 						if(mListenerNegative != null){
-							mListenerNegative.onClick(mAlert, DialogInterface.BUTTON2);
+                            mListenerNegative.onClick(mAlert, DialogInterface.BUTTON2);
 						}
-						mAlert.dismiss();
+                        if(mCancelableOnButton){
+                            mAlert.dismiss();
+                        }
 					}
 				});
 			} else {
 				mBtnNegative.setVisibility(View.GONE);
 			}
 		}
-		
-		mAlert = mBuilder.show();
-		
-		// 显示Dialog后才能使用 setContentView 设置内容视图，否则会报异常，因为Dialog只有在显示渲染之后才能获得其窗口。
+        mAlert = mBuilder.show();
+		mAlert.setCanceledOnTouchOutside(mCancelableOutside);
+
+        // 显示Dialog后才能使用 setContentView 设置内容视图，否则会报异常，因为Dialog只有在显示渲染之后才能获得其窗口。
 		mAlert.getWindow().setContentView(mVRoot);
 		return this;
 	}
@@ -170,4 +177,14 @@ public class MessageDialog {
 		this.mListenerNegative = listener;
 		return this;
 	}
+
+	public MessageDialog setCancelableOutside(boolean cancelable){
+		this.mCancelableOutside = cancelable;
+        return this;
+	}
+
+    public MessageDialog setCancelableOnButton(boolean cancelable){
+        this.mCancelableOnButton = cancelable;
+        return this;
+    }
 }
