@@ -114,6 +114,11 @@ public class MainActivity extends BaseActivity {
 	}
 
 	@Override
+	protected boolean enableSwipeFinish() {
+		return false;
+	}
+
+	@Override
 	protected boolean goBack() {
 		return false;
 	}

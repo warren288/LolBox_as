@@ -170,14 +170,18 @@ public class HotNewsActivity extends BaseActivity {
 			final List<HotNewsBrief> lstNewsBrief = block.getContent();
 
 			holder.tvTime.setText(new Date(1000 * Long.parseLong(block.getCreateTime()))
-						.toLocaleString());
+					.toLocaleString());
 			holder.tvMain.setText(lstNewsBrief.get(0).getTitle());
 			AppContext.getApp().getImgLoader()
 						.displayImage(lstNewsBrief.get(0).getPic(), holder.imgMain);
-
-			holder.tv1.setText(lstNewsBrief.get(1).getTitle());
-			AppContext.getApp().getImgLoader()
+			if(lstNewsBrief.size() < 2){
+				holder.rl1.setVisibility(View.GONE);
+			}else{
+				holder.tv1.setText(lstNewsBrief.get(1).getTitle());
+				AppContext.getApp().getImgLoader()
 						.displayImage(lstNewsBrief.get(1).getPic(), holder.img1);
+
+			}
 
 			if (lstNewsBrief.size() < 3) {
 				holder.rl2.setVisibility(View.GONE);

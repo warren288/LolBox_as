@@ -355,4 +355,24 @@ public class URLUtil {
 	public static final String getUrl_GiftImg(String strGiftId){
 		return String.format(Locale.CHINA, "http://img.lolbox.duowan.com/gifts/%s.png", strGiftId);
 	}
+
+	/**
+	 * 英雄胜率榜
+	 * @param rank 0/1/2/3/4/5/6/7/8/9：全部/王者/大师/钻石/铂金/黄金/白银/青铜
+	 * @return
+	 */
+	public static final String getUrl_HeroWinRate(int rank){
+		return String.format(Locale.CHINA, "http://lolbox.duowan.com/api/record/championRankData.php?rank=%d", rank);
+	}
+
+//	http://img.lolbox.duowan.com/champions/Vayne.jpg
+
+	/**
+	 * 英雄胜率榜中的英雄头像
+	 * @param strEngName 英雄英文名
+	 * @return
+	 */
+	public static final String getUrl_HeroWinRateImg(String strEngName){
+		return String.format(Locale.CHINA, "http://img.lolbox.duowan.com/champions/%s.jpg", strEngName);
+	}
 }

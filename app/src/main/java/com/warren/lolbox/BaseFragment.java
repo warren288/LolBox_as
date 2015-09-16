@@ -5,12 +5,20 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Fragment;
+import android.content.Intent;
 
 import com.warren.lolbox.model.IBaseFragment;
 import com.warren.lolbox.model.IListener;
 import com.warren.lolbox.util.StringUtils;
 
 public abstract class BaseFragment extends Fragment implements IBaseFragment {
+
+	@Override
+	public void startActivity(Intent intent) {
+		super.startActivity(intent);
+		getActivity().overridePendingTransition(android.R.anim.slide_in_left,
+				android.R.anim.slide_out_right);
+	}
 
 	/**
 	 * 异步访问指定路径，然后再异步解析Json

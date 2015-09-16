@@ -7,18 +7,22 @@ import java.util.concurrent.Executors;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.warren.lolbox.model.GestureListener;
 import com.warren.lolbox.model.IListener;
 import com.warren.lolbox.util.LogTool;
 import com.warren.lolbox.util.StringUtils;
+import com.warren.lolbox.widget.SwipeBackLayout;
 import com.warren.lolbox.widget.TitleBar;
 
 /**
@@ -94,29 +98,55 @@ public abstract class BaseActivity extends Activity {
         return handled ? true : super.onKeyDown(keyCode, event);
 	}
 
+    /**
+     * 重写，默认支持所有activity右滑关闭
+     * @param layoutResID
+     */
     @Override
     public void setContentView(int layoutResID) {
+
         super.setContentView(layoutResID);
+		if( ! enableSwipeFinish()){
+            // 由于主题设置为了透明，这里的背景手动地设为浅白色，以避免大量修改activity的xml文件中的根控件背景。
+            ViewGroup decor = (ViewGroup) getWindow().getDecorView();
+            ViewGroup decorChild = (ViewGroup) decor.getChildAt(0);
+            decorChild.setBackgroundResource(R.color.lightgrey);
+		} else{
+            SwipeBackLayout sbl = new SwipeBackLayout(this, null);
+            sbl.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+                    FrameLayout.LayoutParams.MATCH_PARENT));
+            sbl.attachToActivity(this);
+        }
+
         // 2015.9.8 activity默认右滑关闭。
         // 暂未拦截子控件的滑动事件，有listview、gridview、viewpager等有默认滑动事件的控件的页面中，右滑关闭无效。
         // 思路：使用自定义控件作为所有页面的根控件后才能实现。
-        ViewGroup vRoot = (ViewGroup)getWindow().getDecorView().findViewById(android.R.id.content);
-        vRoot.setLongClickable(true);
-
-        vRoot.setOnTouchListener(new GestureListener(this) {
-
-            @Override
-            public boolean left() {
-                return false;
-            }
-
-            @Override
-            public boolean right() {
-                finish();
-                return false;
-            }
-        });
+//        ViewGroup vRoot = (ViewGroup)getWindow().getDecorView();
+////		.findViewById(android.R.id.content);
+//        vRoot.setLongClickable(true);
+////		vRoot.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+//        vRoot.setOnTouchListener(new GestureListener(this) {
+//
+//            @Override
+//            public boolean left() {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean right() {
+//                finish();
+//                return false;
+//            }
+//        });
     }
+
+    /**
+     * 是否支持右滑关闭activity
+     * @return
+     */
+	protected boolean enableSwipeFinish(){
+		return true;
+	}
 
     @Override
 	protected void onResume() {
@@ -138,8 +168,13 @@ public abstract class BaseActivity extends Activity {
 		LogTool.i(getClass().getName(), "onDestroy");
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(0, R.anim.base_slide_right_out);
+    }
 
-	/**
+    /**
      * 设置标题栏
      * @param tb
      */

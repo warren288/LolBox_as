@@ -66,4 +66,9 @@ public class StartActivity extends BaseActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected boolean enableSwipeFinish() {
+        return false;
+    }
 }

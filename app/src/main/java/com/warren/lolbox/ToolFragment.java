@@ -292,8 +292,6 @@ public class ToolFragment extends BaseFragment {
 			case 0:{
 				Intent it = new Intent(getActivity(), HeroListActivity.class);
 				startActivity(it);
-				getActivity().overridePendingTransition(android.R.anim.slide_in_left,
-						android.R.anim.slide_out_right);
 				break;
 			}
 			case 1: {

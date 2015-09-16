@@ -20,6 +20,8 @@ import com.warren.lolbox.AppContext;
 import com.warren.lolbox.R;
 import com.warren.lolbox.model.bean.GiftDot;
 import com.warren.lolbox.url.URLUtil;
+import com.warren.lolbox.util.DeviceUtil;
+import com.warren.lolbox.util.LogTool;
 import com.warren.lolbox.util.StringUtils;
 
 import java.util.List;
@@ -92,7 +94,9 @@ public class GiftView extends GridView implements AdapterView.OnItemClickListene
         final int row = position / NUM_COLUMN;
         final int column = position % NUM_COLUMN;
         final GiftDot gd = mArrDots[row][column];
-
+        if(gd == null){
+            return;
+        }
         MessageDialog md = new MessageDialog(getContext()).setMessage(StringUtils.createStringFromStrList(gd.getLevel(), "\n"))
                 .setTitle(gd.getName()).setCancelableOutside(true).setCancelableOnButton(false);
 
@@ -249,24 +253,27 @@ public class GiftView extends GridView implements AdapterView.OnItemClickListene
 
             if(convertView == null){
                 convertView = LayoutInflater.from(this.context).inflate(R.layout.gift_img_item, parent, false);
-                AbsListView.MarginLayoutParams param = new AbsListView.MarginLayoutParams(
-                        parent.getWidth() / NUM_COLUMN, parent.getWidth() / NUM_COLUMN);
-//                param.setMargins(10, 10, 10, 10);
-                convertView.setPadding(15, 15, 15, 15);
-                convertView.setLayoutParams(param);
             }
+            AbsListView.MarginLayoutParams param = new AbsListView.MarginLayoutParams(
+                    (parent.getWidth()) / NUM_COLUMN, (parent.getWidth()) / NUM_COLUMN);
+            convertView.setPadding(DeviceUtil.dp2Px(getContext(), 10), DeviceUtil.dp2Px(getContext(), 10),
+                    DeviceUtil.dp2Px(getContext(), 10), DeviceUtil.dp2Px(getContext(), 10));
+            convertView.setLayoutParams(param);
+
             StatefulImageView simg = (StatefulImageView) convertView.findViewById(R.id.simg);
             TextView tv = (TextView) convertView.findViewById(R.id.tv);
             simg.setStateEnable(true);
             int row = position / NUM_COLUMN;
             int column = position % NUM_COLUMN;
             GiftDot gd = mArrDots[row][column];
+
             if(gd == null){
-                if(position == 0){
-                    System.out.print("position == 1");
-                }
                 convertView.setVisibility(View.INVISIBLE);
                 return convertView;
+            }
+
+            if(position == 0){
+                LogTool.i("GiftView", gd.getId() + "," + gd.getName());
             }
             convertView.setVisibility(View.VISIBLE);
             mImgLoader.displayImage(URLUtil.getUrl_GiftImg(gd.getId()), simg);

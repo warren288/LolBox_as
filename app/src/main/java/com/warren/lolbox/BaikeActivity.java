@@ -48,18 +48,21 @@ public class BaikeActivity extends BaseActivity {
 		SimpleTool item3 = new SimpleTool(R.drawable.icon_fuwen, "符文");
 		SimpleTool item4 = new SimpleTool(R.drawable.icon_zjzr, "最佳阵容");
 		SimpleTool item5 = new SimpleTool(R.drawable.icon_zhsjn, "召唤师技能");
+		SimpleTool item6 = new SimpleTool(R.drawable.ic_herowinrate, "英雄胜率榜");
 
 		mLstItems.add(item1);
 		mLstItems.add(item2);
 		mLstItems.add(item3);
 		mLstItems.add(item4);
 		mLstItems.add(item5);
+		mLstItems.add(item6);
 
 		mActivitys.add(MaterialTypesActivity.class);
 		mActivitys.add(GiftActivity.class);
 		mActivitys.add(RuneActivity.class);
 		mActivitys.add(BestGroupActivity.class);
 		mActivitys.add(SummonerAbilityActivity.class);
+		mActivitys.add(HeroWinRateActivity.class);
 
 		AdapterList adapter = new AdapterList(LayoutInflater.from(this), mLstItems);
 
